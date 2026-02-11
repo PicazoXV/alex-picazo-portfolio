@@ -1,0 +1,1033 @@
+/* =========================================================
+   1) FONTS (Patrick vibe)
+   - Tusker Grotesk (paid): /public/fonts/TuskerGrotesk-700.woff2 etc
+   - Fallback: Teko
+   ========================================================= */
+
+@font-face{
+  font-family: "Tusker Grotesk";
+  src:
+    url("/fonts/TuskerGrotesk-700.woff2") format("woff2"),
+    url("/fonts/TuskerGrotesk-700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Tusker Grotesk";
+  src:
+    url("/fonts/TuskerGrotesk-500.woff2") format("woff2"),
+    url("/fonts/TuskerGrotesk-500.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================
+   2) TOKENS / BASE
+   ========================================================= */
+
+:root{
+  --font-display: "Tusker Grotesk", "Teko", "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  --font-sans: "Tusker Grotesk", "Teko", "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+
+  --bg: #0b0c0f;
+  --black: #000;
+
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.62);
+  --border: rgba(255,255,255,0.16);
+
+  --pad-x: clamp(28px, 4.2vw, 120px);
+
+  --nav-h: 74px;
+  --hero-h: calc(100vh - var(--nav-h));
+  --hero-gap: clamp(22px, 3vw, 64px);
+
+  --section-y: clamp(110px, 11vw, 220px);
+
+  --hero-title-size: clamp(7.5rem, 22vh, 21rem);
+  --hero-title-leading: 0.66;
+  --hero-right-text: clamp(1.2rem, 1.65vw, 2.3rem);
+
+  --hero-top-pad: clamp(18px, 2.2vw, 40px);
+  --hero-bottom-pad: clamp(56px, 6vw, 96px);
+
+  --radius: 18px;
+  --ease: cubic-bezier(.2,.8,.2,1);
+
+  --bg-image: url("/hero-bg.jpg");
+
+  /* ✅ Works: escalado suave para evitar “saltos” prematuros */
+  --works-title: clamp(3.1rem, 5.8vw, 7.6rem);
+  --works-desc: clamp(1.02rem, 1.05vw, 1.22rem);
+  --works-tag: clamp(.78rem, .85vw, .96rem);
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+}
+
+::selection{ background: rgba(255,255,255,0.18); }
+a{ color: inherit; text-decoration: none; }
+img{ max-width: 100%; display: block; }
+.muted{ color: var(--muted); }
+
+.section{
+  padding: var(--section-y) 0;
+}
+
+/* Contenedor “normal” para footer o bloques simples */
+.container{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+/* =========================================================
+   3) BACKDROP FIJO
+   ========================================================= */
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+  filter: contrast(1.08) saturate(0.95);
+}
+
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0,0,0,0.20);
+}
+
+/* =========================================================
+   4) SCROLL FADE OVERLAY (dinámico)
+   (controlado por ScrollFade.jsx)
+   ========================================================= */
+
+.scrollFade{
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: #000;
+  opacity: var(--scroll-fade, 0);
+  will-change: opacity;
+}
+
+/* asegura contenido por encima */
+.hero, .section{ position: relative; z-index: 10; }
+.nav{ z-index: 50; }
+
+/* =========================================================
+   5) NAVBAR (blur al primer scroll)
+   ========================================================= */
+
+.nav{
+  position: sticky;
+  top: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+  transition: background .25s var(--ease), backdrop-filter .25s var(--ease), border-color .25s var(--ease);
+}
+
+/* 👇 Importante: esto SOLO ocurre si Navbar.jsx pone .is-scrolled */
+.nav.is-scrolled{
+  background: rgba(11,12,15,0.58);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: rgba(255,255,255,0.14);
+}
+
+.nav__inner{
+  width: 100%;
+  padding: 0 var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.nav__left{
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.brand{
+  font-family: var(--font-sans);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  opacity: 0.95;
+  white-space: nowrap;
+}
+
+.role{
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav__links{
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+}
+
+.nav__links a{
+  font-size: .95rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.80);
+  transition: color .2s var(--ease);
+}
+.nav__links a:hover{ color: rgba(255,255,255,0.98); }
+
+@media (max-width: 860px){
+  .role{ display: none; }
+  .nav__links{ gap: .85rem; flex-wrap: wrap; justify-content: flex-end; }
+}
+
+/* =========================================================
+   6) SECTION HEADER (Section.jsx nuevo)
+   ========================================================= */
+
+.section__inner{
+  padding: 0 var(--pad-x);
+}
+
+.section__head{
+  margin-bottom: clamp(24px, 4vw, 56px);
+  max-width: 1100px;
+}
+
+.section__title{
+  margin: 0;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  font-size: clamp(2.8rem, 6.6vw, 7.8rem);
+  line-height: 0.72;
+}
+
+.section__sub{
+  margin: 1rem 0 0 0;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 800;
+  font-size: clamp(1rem, 1.15vw, 1.35rem);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.72);
+}
+
+/* =========================================================
+   7) HERO
+   ========================================================= */
+
+.hero{
+  min-height: var(--hero-h);
+  position: relative;
+  display: grid;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 1;
+  background:
+    radial-gradient(1200px 700px at 18% 18%, rgba(0,0,0,0.08), transparent 60%),
+    radial-gradient(1000px 600px at 85% 25%, rgba(0,0,0,0.38), transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0.58));
+}
+
+.hero__content{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: var(--hero-top-pad) var(--pad-x) var(--hero-bottom-pad);
+  display: grid;
+  align-items: end;
+}
+
+.hero__grid{
+  display: grid;
+  grid-template-columns: 1.7fr 0.7fr;
+  gap: var(--hero-gap);
+  align-items: end;
+  min-height: calc(var(--hero-h) * 0.90);
+}
+
+.hero__left{
+  display: grid;
+  align-content: end;
+  gap: clamp(10px, 1.2vw, 16px);
+}
+
+.hero__pill{
+  display: inline-flex;
+  align-items: center;
+  padding: .44rem .78rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.88);
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: 3rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero__title{
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--hero-title-size);
+  line-height: var(--hero-title-leading);
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  text-transform: uppercase;
+  max-height: 60vh;
+}
+
+.hero__title .under{
+  position: relative;
+  display: inline-block;
+}
+
+.hero__title .under::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom: clamp(-14px, -1.6vh, -10px);
+  width:100%;
+  height: clamp(6px, .9vh, 10px);
+  border-radius:999px;
+  background: rgba(255,255,255,0.14);
+}
+
+.hero__right{
+  justify-self: end;
+  text-align: right;
+  max-width: 46ch;
+  padding-bottom: clamp(18px, 2.5vh, 38px);
+}
+
+.hero__desc{
+  font-family: var(--font-sans);
+  font-size: var(--hero-right-text);
+  line-height: 1.45;
+  color: rgba(255,255,255,0.86);
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.hero__actions{
+  margin-top: 1.4rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .88rem 1.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  font-family: var(--font-sans);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+}
+.btn:hover{
+  border-color: rgba(255,255,255,0.42);
+  background: rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.98);
+  transform: translateY(-1px);
+}
+
+.hero__scroll{
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255,255,255,0.55);
+  font-size: .82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  user-select: none;
+  font-family: var(--font-sans);
+  font-weight: 900;
+}
+
+@media (max-width: 1100px){
+  .hero__grid{
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 1.6rem;
+  }
+  .hero__right{
+    justify-self: start;
+    text-align: left;
+    max-width: 70ch;
+  }
+  .hero__actions{
+    justify-content: flex-start;
+  }
+}
+
+/* =========================================================
+   8) ANIMACIONES
+   ========================================================= */
+
+@keyframes fadeUp{
+  from{ opacity: 0; transform: translateY(14px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+.animate-in{ animation: fadeUp .75s var(--ease) both; }
+.delay-1{ animation-delay: .06s; }
+.delay-2{ animation-delay: .14s; }
+.delay-3{ animation-delay: .22s; }
+
+/* =========================================================
+   9) ABOUT
+   ========================================================= */
+
+.about{
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.10);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.about__grid{
+  padding: 0 var(--pad-x);
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(18px, 3vw, 44px);
+  align-items: start;
+}
+
+@media (max-width: 1100px){
+  .about__grid{ grid-template-columns: 1fr; }
+}
+
+.about__kicker{
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-weight: 900;
+  color: rgba(255,255,255,0.68);
+  font-size: clamp(.8rem, .9vw, 1rem);
+  margin: 0 0 1.2rem 0;
+}
+
+.about__title{
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.2vw, 9.2rem);
+  line-height: 0.72;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 0 2.2rem 0;
+  letter-spacing: 0.02em;
+}
+
+.about__text{
+  max-width: 72ch;
+  color: rgba(255,255,255,0.78);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-weight: 750;
+  font-size: clamp(1.05rem, 1.25vw, 1.45rem);
+  line-height: 1.65;
+}
+
+.about__photo{
+  justify-self: end;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 1100px){
+  .about__photo{
+    justify-self: start;
+    max-width: 420px;
+    margin-top: 1.2rem;
+  }
+}
+
+.about__photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about.section{
+  /* mantiene el padding base y añade “aire” arriba */
+  padding-top: calc(var(--section-y) + clamp(80px, 10vh, 190px));
+}
+
+
+/* =========================================================
+   10) SKILLS
+   ========================================================= */
+
+.skills{ position: relative; }
+
+.skills-wrap{
+  padding: 0 var(--pad-x);
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.skills-kicker{
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-weight: 900;
+  color: rgba(255,255,255,0.68);
+  font-size: clamp(.8rem, .9vw, 1rem);
+  margin: 0 0 1.2rem 0;
+}
+
+.skills-title{
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.2vw, 9.5rem);
+  line-height: 0.72;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  font-weight: 700;
+  margin: 0 0 2.2rem 0;
+}
+
+.skills-sub{
+  max-width: 70ch;
+  margin: 0 0 2.2rem 0;
+  color: rgba(255,255,255,0.75);
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.3vw, 1.5rem);
+  line-height: 1.55;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-weight: 800;
+}
+
+.pills{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pill{
+  padding: .7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  font-family: var(--font-sans);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: clamp(.9rem, 1.0vw, 1.1rem);
+}
+
+/* =========================================================
+   11) WORKS – Alternado REAL + tipografía que se ajusta antes
+   ========================================================= */
+
+.worksAlt{
+  display: grid;
+  gap: clamp(34px, 5vw, 90px);
+}
+
+/* item */
+.workItem{
+  position: relative;
+}
+
+/* link: 2 columnas estables y sin “romper” por min-width */
+.workLink{
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); /* IMAGEN (más) + TEXTO (menos) */
+  align-items: center;
+  gap: clamp(18px, 3vw, 56px);
+  text-decoration: none;
+}
+
+/* media (por defecto: izquierda) */
+.workMedia{
+  position: relative;
+  width: 100%;
+  max-width: none;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+  aspect-ratio: var(--ratio, 16 / 9);
+  justify-self: stretch;
+}
+
+.workMedia img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  transform: scale(1.01);
+  transition: transform .45s var(--ease), filter .45s var(--ease);
+}
+
+/* texto (por defecto: derecha) */
+.workText{
+  text-align: left;
+  justify-self: start;
+  width: 100%;
+  max-width: 52ch; /* suficiente para que no “salte” pronto */
+  min-width: 0;    /* importantísimo para grid */
+}
+
+/* ============ RIGHT layout (cuando hay .is-right) ============ */
+/* En is-right: TEXTO izquierda / IMAGEN derecha */
+.workItem.is-right .workLink{
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); /* TEXTO + IMAGEN */
+}
+
+.workItem.is-right .workText{
+  order: 1;
+  text-align: right;
+  justify-self: end;
+}
+
+.workItem.is-right .workMedia{
+  order: 2;
+  justify-self: stretch;
+}
+
+/* ============ Tipografía (fluida, aguanta 2 columnas más tiempo) ============ */
+.workTitle{
+  margin: 0;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  font-size: var(--works-title);
+  line-height: 0.72;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.workTag{
+  margin: .65rem 0 0 0;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-weight: 900;
+  font-size: var(--works-tag);
+  color: rgba(255,255,255,0.78);
+}
+
+.workDesc{
+  margin: 1.05rem 0 0 0;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 800;
+  font-size: var(--works-desc);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.74);
+
+  /* ✅ evita “saltos feos” de líneas (sin forzar nowrap) */
+  text-wrap: pretty;
+}
+
+.workCta{
+  display: inline-flex;
+  margin-top: 1.25rem;
+  font-family: var(--font-sans);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .9rem;
+  color: rgba(255,255,255,0.92);
+  border-bottom: 1px solid rgba(255,255,255,0.28);
+  padding-bottom: .25rem;
+  width: fit-content;
+  transition: border-color .2s var(--ease), transform .2s var(--ease);
+}
+
+/* Hover */
+.workLink:hover .workMedia img{
+  transform: scale(1.06);
+  filter: grayscale(0.15) contrast(1.08);
+}
+.workLink:hover .workCta{
+  border-bottom-color: rgba(255,255,255,0.62);
+  transform: translateY(-1px);
+}
+
+/* ✅ “Paso intermedio” (antes de iPad/móvil): ajusta tipografía, sigue 2 columnas */
+@media (max-width: 1180px){
+  :root{
+    --works-title: clamp(2.9rem, 5.4vw, 6.6rem);
+    --works-desc: clamp(1rem, 1.0vw, 1.15rem);
+    --works-tag: clamp(.76rem, .82vw, .92rem);
+  }
+
+  .workText{ max-width: 60ch; }
+}
+
+/* iPad: ya apila debajo de la imagen (como pediste) */
+@media (max-width: 980px){
+  .workLink{
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .workItem.is-right .workLink{
+    grid-template-columns: 1fr;
+  }
+
+  .workText{
+    max-width: 72ch;
+    text-align: left;
+    justify-self: start;
+  }
+
+  .workItem.is-right .workText{
+    text-align: left;
+    justify-self: start;
+  }
+}
+
+/* móviles pequeños */
+@media (max-width: 520px){
+  .workTitle{
+    font-size: clamp(2.2rem, 11.5vw, 3.5rem);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+  }
+  .workDesc{
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .workText{
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   12) CONTACT – tipo la foto (pills + headline gigante + barra links)
+   ========================================================= */
+
+.contactHero{
+  position: relative;
+  padding: 0 var(--pad-x);
+  min-height: clamp(520px, 68vh, 820px);
+  display: grid;
+  align-items: center;
+}
+
+/* Fondo oscuro encima del fondo fijo (para legibilidad) */
+.contactHero::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+  z-index: 1;
+}
+
+/* layout interno */
+.contactHero__grid{
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(20px, 3vw, 56px);
+  align-items: center;
+  padding: clamp(18px, 3vw, 44px);
+}
+
+/* headline enorme a la izquierda */
+.contactBig{
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  font-size: clamp(5rem, 10vw, 12rem);
+  line-height: 0.78;
+  margin: 0;
+}
+
+/* pills flotantes */
+.contactPills{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.contactPill{
+  padding: .75rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.32);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  font-family: var(--font-sans);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: clamp(.85rem, 1.0vw, 1.05rem);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* fila inferior: frase + botón + links */
+.contactBar{
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(14px, 2.2vw, 28px);
+  padding: 0 clamp(18px, 3vw, 44px) clamp(14px, 2.4vw, 24px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.contactBar__ask{
+  font-family: var(--font-sans);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,0.80);
+  margin: 0;
+}
+
+/* botón estilo “pill” claro como la foto */
+.contactBtn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .8rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.92);
+  color: rgba(0,0,0,0.88);
+  font-family: var(--font-sans);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  transition: transform .2s var(--ease), background .2s var(--ease);
+}
+.contactBtn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.98);
+}
+
+/* links abajo */
+.contactLinks{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,0.72);
+  border-top: 1px solid rgba(255,255,255,0.14);
+  padding-top: 14px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.contactLinks a{
+  color: rgba(255,255,255,0.72);
+  transition: color .2s var(--ease);
+}
+.contactLinks a:hover{
+  color: rgba(255,255,255,0.98);
+}
+
+@media (max-width: 1100px){
+  .contactHero__grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   13) FOOTER
+   ========================================================= */
+
+.footer{
+  padding: 0 var(--pad-x);
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: .10em;
+  font-weight: 900;
+  font-size: .9rem;
+}
+/* ✅ Más aire entre secciones para que el negro "respire" */
+:root{
+  --section-y: clamp(130px, 12vw, 260px);
+}
+
+/* ✅ Negro sólido antes del contenido del ABOUT (más gap arriba) */
+.about.section{
+  padding-top: calc(var(--section-y) + clamp(110px, 12vh, 240px));
+}
+
+/* ✅ Mantén HERRAMIENTAS (skills) más “negro” y con espacio antes de WORKS */
+.skills.section{
+  padding-bottom: calc(var(--section-y) + clamp(80px, 10vh, 220px));
+}
+/* =========================================================
+   HERO FIXES:
+   - Menos saltos de línea en la descripción derecha
+   - Título escala progresivo (sin “desaparecer” el texto)
+   - Quitar líneas debajo del título
+   - Quitar círculo/borde del JUNIOR y hacerlo un pelín más grande
+   ========================================================= */
+
+/* Título: más responsive (baja de forma suave en pantallas pequeñas) */
+:root{
+  /* antes: clamp(7.5rem, 22vh, 21rem) */
+  --hero-title-size: clamp(3.8rem, 10.8vw, 12.8rem);
+  --hero-title-leading: 0.70;
+
+  /* texto derecha un pelín más estable */
+  --hero-right-text: clamp(1.05rem, 1.25vw, 1.85rem);
+}
+
+/* Layout: dale más aire al texto derecha para que no “rompa” tanto */
+.hero__grid{
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.95fr);
+  gap: clamp(18px, 2.2vw, 44px);
+}
+
+/* Evita que el texto derecha se estreche demasiado */
+.hero__right{
+  max-width: 68ch;      /* antes 46ch */
+  min-width: 0;
+  padding-bottom: clamp(12px, 2vh, 26px);
+}
+
+/* Descripción derecha: texto más “estable” (menos cortes feos) */
+.hero__desc{
+  line-height: 1.35;     /* un poco más compacto */
+  letter-spacing: .04em; /* menos separación = menos saltos */
+  text-wrap: balance;    /* mejor distribución de líneas (si el navegador lo soporta) */
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* ✅ Quitar las líneas debajo del título (la subrayada que tenías) */
+.hero__title .under::after{
+  display: none !important;
+}
+
+/* Por si tienes otras “líneas” (hr/div) en el hero, las ocultamos sin romper nada */
+.hero hr,
+.hero .heroLine,
+.hero .hero__line,
+.hero .hero__rule{
+  display: none !important;
+}
+
+/* ✅ JUNIOR: quitar círculo/borde y hacerlo un pelín más grande */
+.hero__pill{
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+
+  font-size: 1.02rem;   /* un pelín más grande */
+  letter-spacing: .18em;
+  opacity: .9;
+}
+
+/* ✅ En resoluciones “raras” donde antes se te ocultaba/rompía el texto:
+   en vez de ocultar, apilamos (título arriba, texto debajo) */
+@media (max-width: 1180px){
+  .hero__grid{
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    align-items: start;
+  }
+
+  .hero__right{
+    justify-self: start;
+    text-align: left;
+    max-width: 72ch;
+  }
+
+  .hero__actions{
+    justify-content: flex-start;
+  }
+}
+
+/* Tablet/móvil: el título baja aún más progresivo */
+@media (max-width: 760px){
+  :root{
+    --hero-title-size: clamp(3.2rem, 14vw, 6.2rem);
+    --hero-right-text: clamp(1rem, 3.6vw, 1.25rem);
+  }
+
+  .hero__desc{
+    letter-spacing: .03em;
+    line-height: 1.4;
+  }
+}
