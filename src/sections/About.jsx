@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export default function About() {
   return (
     <section className="section about" id="about">
@@ -29,9 +31,15 @@ export default function About() {
           </p>
         </div>
 
-        <figure className="about__photo animate-in delay-3">
+        <motion.figure
+          className="about__photo"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: false, amount: 0.8 }}
+        >
           <img src="/about-me.jpg" alt="Foto de Alex Picazo" />
-        </figure>
+        </motion.figure>
       </div>
     </section>
   );

@@ -443,7 +443,7 @@ body::after{
   display: grid;
   grid-template-columns: 1.15fr .85fr;
   gap: clamp(18px, 3vw, 44px);
-  align-items: start;
+  align-items: center;
 }
 
 @media (max-width: 1100px){
@@ -484,12 +484,19 @@ body::after{
 .about__photo{
   justify-self: end;
   width: 100%;
-  max-width: 420px;        /* puedes ajustar el tamaño */
-  aspect-ratio: 1 / 1;     /* importante para que sea círculo perfecto */
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.14);
   background: rgba(255,255,255,0.06);
+}
+
+.about__photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 @media (max-width: 1100px){
@@ -497,6 +504,10 @@ body::after{
     justify-self: start;
     max-width: 420px;
     margin-top: 1.2rem;
+    width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   }
 }
 
@@ -556,7 +567,85 @@ body::after{
   letter-spacing: .04em;
   font-weight: 800;
 }
+/* contenedor (recorta lo que sale fuera) */
+.skillsMarquee{
+  overflow: hidden;
+  width: 100%;
+  /* opcional: un fade en bordes para que quede pro */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
 
+/* la “cinta” que se mueve */
+.skillsMarquee__track{
+  display: flex;
+  gap: 14px;               /* ajusta separación entre pills */
+  width: max-content;
+  padding: 10px 0;
+  animation: skills-marquee 22s linear infinite;
+  will-change: transform;
+}
+
+/* pausa al pasar el ratón (opcional) */
+.skillsMarquee:hover .skillsMarquee__track{
+  animation-play-state: paused;
+}
+
+/* animación infinita */
+@keyframes skills-marquee{
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* porque duplicamos la lista */
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  .skillsMarquee__track{ animation: none; }
+}
+.skillsMarquee2{
+  display: grid;
+  gap: 14px;
+  width: 100%;
+}
+
+/* cada fila recorta lo que sale fuera */
+.marqueeRow{
+  overflow: hidden;
+  width: 100%;
+  padding: 6px 0;
+
+  /* fade pro en bordes */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+/* la cinta que se mueve */
+.marqueeTrack{
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+
+  animation: marquee 28s linear infinite;
+  animation-play-state: running;
+}
+
+/* segunda fila al revés */
+.marqueeRow.reverse .marqueeTrack{
+  animation-direction: reverse;
+}
+
+/* infinito porque duplicamos la lista */
+@keyframes marquee{
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-50%,0,0); }
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  .marqueeTrack{ animation: none; }
+}
 .pills{
   display: flex;
   flex-wrap: wrap;

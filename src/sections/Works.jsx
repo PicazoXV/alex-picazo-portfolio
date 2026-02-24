@@ -16,7 +16,7 @@ export default function Works() {
       desc: "Web/landing enfocada a conversión.",
       img: "/oriacademy.jpg",
       tag: "LANDING, CONVERSION",
-      ratio: "4 / 3",
+      ratio: "16 / 9",
     },
     {
       name: "Polmat",

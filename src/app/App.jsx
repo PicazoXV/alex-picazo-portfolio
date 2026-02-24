@@ -30,11 +30,7 @@ export default function App() {
         {/* id="contacto" */}
         <Contact />
 
-        <footer className="section">
-          <div className="container muted">
-            {new Date().getFullYear()} Alex Picazo — Front-End Developer
-          </div>
-        </footer>
+        
       </main>
     </>
   );
