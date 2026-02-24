@@ -484,9 +484,9 @@ body::after{
 .about__photo{
   justify-self: end;
   width: 100%;
-  max-width: 520px;
-  aspect-ratio: 4 / 5;
-  border-radius: 22px;
+  max-width: 420px;        /* puedes ajustar el tamaño */
+  aspect-ratio: 1 / 1;     /* importante para que sea círculo perfecto */
+  border-radius: 50%;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.14);
   background: rgba(255,255,255,0.06);

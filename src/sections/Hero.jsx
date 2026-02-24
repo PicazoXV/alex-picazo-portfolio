@@ -20,7 +20,7 @@ TRANSFORMO LOS REQUISITOS EN INTERFACES EFICIENTES.
             </p>
 
             <div className="hero__actions animate-in delay-3">
-              <a className="btn" href="#contacto">Contácta</a>
+              <a className="btn" href="#contacto">Contact me</a>
             </div>
           </div>
         </div>

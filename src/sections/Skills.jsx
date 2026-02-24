@@ -16,6 +16,8 @@ export default function Skills() {
     "APIs",
     "Python",
     "MySQL",
+    "Resend",
+    "Vercel",
     "Git","GitHub"
   ];
 
