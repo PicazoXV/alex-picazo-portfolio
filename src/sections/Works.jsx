@@ -4,11 +4,19 @@ export default function Works() {
   const works = [
     {
       name: "VLC Real State",
-      url: "https://vlcrealstate.com",
+      url: "https://vlcrealestateinmobiliaria.com",
       desc: "WordPress desde 0: diseño + implementación.",
       img: "/vlcrealstate.jpg",
       tag: "UX/UI DESIGN, DEVELOPMENT",
       ratio: "16 / 9",
+    },
+    {
+      name: "Ori",
+      url: "https://oriacademy.es",
+      desc: "Web/landing enfocada a conversión.",
+      img: "/oriacademy.jpg",
+      tag: "LANDING, CONVERSION",
+      ratio: "4 / 3",
     },
     {
       name: "Polmat",
@@ -16,15 +24,7 @@ export default function Works() {
       desc: "Web corporativa desde 0, estructura y maquetación.",
       img: "/polmat.jpg",
       tag: "WEB DESIGN, DEVELOPMENT",
-      ratio: "4 / 3",
-    },
-    {
-      name: "Ori",
-      url: "https://oriacademy.com",
-      desc: "Web/landing enfocada a conversión.",
-      img: "/oriacademy.jpg",
-      tag: "LANDING, CONVERSION",
-      ratio: "21 / 9",
+      ratio: "16 / 9",
     },
   ];
 

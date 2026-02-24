@@ -7,20 +7,20 @@ export default function Hero() {
             <div className="hero__pill animate-in delay-1">Junior</div>
 
             <h1 className="hero__title animate-in delay-2">
-              <span className="under">Designer</span>
+              <span className="under">Web</span>
               <br />
-              <span className="under">Developer</span>
+              <span className="under">Designer</span>
             </h1>
           </div>
 
           <div className="hero__right">
             <p className="hero__desc animate-in delay-2">
               CONSTRUYO INTERFACES LIMPIAS Y RESPONSIVE CON REACT Y UN FUERTE SENTIDO DEL DISEÑO.
-TRANSFORMO LOS REQUISITOS EN INTERFACES USABLES.
+TRANSFORMO LOS REQUISITOS EN INTERFACES EFICIENTES.
             </p>
 
             <div className="hero__actions animate-in delay-3">
-              <a className="btn" href="#contacto">Contact me</a>
+              <a className="btn" href="#contacto">Contácta</a>
             </div>
           </div>
         </div>

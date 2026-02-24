@@ -1,9 +1,9 @@
 export default function Contact() {
   const pills = [
     "UX/UI DESIGN",
-    "FRONTEND DEVELOPMENT",
-    "REACT + VITE",
-    "RESPONSIVE UI",
+    "FULLSTACK DEVELOPMENT",
+    "REACT + NODE",
+    "API INTEGRATION",
     "DESIGN SYSTEMS",
     "ACCESSIBILITY",
     "FIGMA TO CODE",

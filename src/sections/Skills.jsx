@@ -3,12 +3,20 @@ export default function Skills() {
     "HTML",
     "CSS",
     "JavaScript",
+    "Typescript",
     "React",
+    "Node.js",
     "Vite",
     "Tailwind",
     "Bootstrap",
     "Figma",
     "WordPress",
+    "Flask",
+    "PHP",
+    "APIs",
+    "Python",
+    "MySQL",
+    "Git","GitHub"
   ];
 
   return (

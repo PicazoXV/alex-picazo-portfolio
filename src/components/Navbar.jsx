@@ -15,13 +15,13 @@ export default function Navbar() {
       <div className="nav__inner">
         <div className="nav__left">
           <a className="brand" href="#top">Alex Picazo</a>
-          <div className="role">Front-end Developer / UX-UI</div>
+          <div className="role">Full-Stack Developer / UX-UI</div>
         </div>
 
         <nav className="nav__links" aria-label="Navegación principal">
           {/* IDs reales */}
-          <a href="#works">Works</a>
           <a href="#about">About</a>
+          <a href="#works">Works</a>
           <a href="#skills">Skills</a>
           <a href="#contacto">Contact</a>
         </nav>
