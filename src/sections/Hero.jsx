@@ -4,12 +4,12 @@ export default function Hero() {
       <div className="hero__content">
         <div className="hero__grid">
           <div className="hero__left">
-            <div className="hero__pill animate-in delay-1">Junior</div>
+           {/*<div className="hero__pill animate-in delay-1">Junior</div>*/}
 
             <h1 className="hero__title animate-in delay-2">
               <span className="under">Web</span>
               <br />
-              <span className="under">Designer</span>
+              <span className="under">Developer</span>
             </h1>
           </div>
 

@@ -669,7 +669,7 @@ body::after{
 }
 
 /* =========================================================
-   11) WORKS – Alternado REAL + tipografía que se ajusta antes
+   11) WORKS – Alternado REAL + Title alineado con imagen
    ========================================================= */
 
 .worksAlt{
@@ -677,21 +677,16 @@ body::after{
   gap: clamp(34px, 5vw, 90px);
 }
 
-/* item */
-.workItem{
-  position: relative;
-}
+.workItem{ position: relative; }
 
-/* link: 2 columnas estables y sin “romper” por min-width */
 .workLink{
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); /* IMAGEN (más) + TEXTO (menos) */
-  align-items: center;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  align-items: start; /* 👈 clave: ya no centra, alinea arriba */
   gap: clamp(18px, 3vw, 56px);
   text-decoration: none;
 }
 
-/* media (por defecto: izquierda) */
 .workMedia{
   position: relative;
   width: 100%;
@@ -713,19 +708,35 @@ body::after{
   transition: transform .45s var(--ease), filter .45s var(--ease);
 }
 
-/* texto (por defecto: derecha) */
+/* TEXTO */
 .workText{
   text-align: left;
   justify-self: start;
   width: 100%;
-  max-width: 52ch; /* suficiente para que no “salte” pronto */
-  min-width: 0;    /* importantísimo para grid */
+  max-width: 52ch;
+  min-width: 0;
+
+  /* repartimos el bloque para que el título quede arriba */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-/* ============ RIGHT layout (cuando hay .is-right) ============ */
-/* En is-right: TEXTO izquierda / IMAGEN derecha */
+/* bloque superior (título + tag) */
+.workTop{
+  /* si quieres igualar aún más con la foto, puedes tocar este padding */
+  padding-top: clamp(2px, 0.4vw, 8px);
+}
+
+/* bloque inferior (cta + desc debajo) */
+.workBottom{
+  margin-top: auto; /* 👈 empuja CTA + desc hacia abajo si hay altura */
+  padding-top: 1.2rem;
+}
+
+/* RIGHT layout */
 .workItem.is-right .workLink{
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); /* TEXTO + IMAGEN */
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
 }
 
 .workItem.is-right .workText{
@@ -736,10 +747,9 @@ body::after{
 
 .workItem.is-right .workMedia{
   order: 2;
-  justify-self: stretch;
 }
 
-/* ============ Tipografía (fluida, aguanta 2 columnas más tiempo) ============ */
+/* ============ Tipografía ============ */
 .workTitle{
   margin: 0;
   font-family: var(--font-display);
@@ -748,7 +758,6 @@ body::after{
   font-weight: 700;
   font-size: var(--works-title);
   line-height: 0.72;
-
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
@@ -764,23 +773,9 @@ body::after{
   color: rgba(255,255,255,0.78);
 }
 
-.workDesc{
-  margin: 1.05rem 0 0 0;
-  font-family: var(--font-sans);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  font-weight: 800;
-  font-size: var(--works-desc);
-  line-height: 1.55;
-  color: rgba(255,255,255,0.74);
-
-  /* ✅ evita “saltos feos” de líneas (sin forzar nowrap) */
-  text-wrap: pretty;
-}
-
 .workCta{
   display: inline-flex;
-  margin-top: 1.25rem;
+  margin-top: 0;
   font-family: var(--font-sans);
   font-weight: 900;
   text-transform: uppercase;
@@ -793,6 +788,18 @@ body::after{
   transition: border-color .2s var(--ease), transform .2s var(--ease);
 }
 
+/* ✅ nueva descripción debajo del CTA (hueco) */
+.workDescBelow{
+  margin: .85rem 0 0 0;
+  font-family: var(--font-sans);
+  letter-spacing: .04em;
+  font-weight: 700;
+  font-size: var(--works-desc);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.74);
+  text-wrap: pretty;
+}
+
 /* Hover */
 .workLink:hover .workMedia img{
   transform: scale(1.06);
@@ -803,18 +810,17 @@ body::after{
   transform: translateY(-1px);
 }
 
-/* ✅ “Paso intermedio” (antes de iPad/móvil): ajusta tipografía, sigue 2 columnas */
+/* Paso intermedio */
 @media (max-width: 1180px){
   :root{
     --works-title: clamp(2.9rem, 5.4vw, 6.6rem);
     --works-desc: clamp(1rem, 1.0vw, 1.15rem);
     --works-tag: clamp(.76rem, .82vw, .92rem);
   }
-
   .workText{ max-width: 60ch; }
 }
 
-/* iPad: ya apila debajo de la imagen (como pediste) */
+/* iPad/móvil: apila */
 @media (max-width: 980px){
   .workLink{
     grid-template-columns: 1fr;
@@ -835,6 +841,10 @@ body::after{
     text-align: left;
     justify-self: start;
   }
+
+  .workBottom{
+    margin-top: 1rem; /* ya no hace falta empujar al fondo */
+  }
 }
 
 /* móviles pequeños */
@@ -844,15 +854,12 @@ body::after{
     line-height: 0.9;
     letter-spacing: 0.01em;
   }
-  .workDesc{
+  .workDescBelow{
     font-size: 0.95rem;
     line-height: 1.5;
   }
-  .workText{
-    max-width: 100%;
-  }
+  .workText{ max-width: 100%; }
 }
-
 /* =========================================================
    12) CONTACT – tipo la foto (pills + headline gigante + barra links)
    ========================================================= */
