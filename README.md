@@ -1,16 +1,58 @@
-# React + Vite
+# 🚀 Portfolio – Alex Picazo Full Stack Developer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> I BUILD CLEAN, RESPONSIVE INTERFACES WITH REACT AND A STRONG DESIGN SENSE.  
+> I TURN REQUIREMENTS INTO USABLE UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 👨‍💻 Sobre el Proyecto
 
-## React Compiler
+Este es mi portfolio personal como **Junior Full Stack Developer**, donde presento mis proyectos, habilidades técnicas y enfoque de desarrollo.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+El diseño sigue una línea **editorial moderna y minimalista**, priorizando:
 
-## Expanding the ESLint configuration
+- ✨ Tipografía impactante  
+- 🎯 Experiencia de usuario cuidada  
+- ⚡ Transiciones y animaciones suaves  
+- 📱 Diseño completamente responsive  
+- 🧩 Código limpio y estructurado  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+### 🎨 Frontend
+- ⚛️ React  
+- ⚡ Vite  
+- 🟨 JavaScript (ES6+)  
+- 🎨 CSS3  
+- 🅱️ Bootstrap  
+
+### 🔧 Backend
+- 🟢 Node.js  
+- 🚀 Express  
+- 🔗 REST APIs  
+
+---
+
+## 📂 Secciones
+
+- 🏠 **Hero** – Presentación personal con identidad visual fuerte  
+- 🛠️ **Skills** – Tecnologías organizadas visualmente  
+- 💼 **Works** – Proyectos destacados con diseño alternado editorial  
+- 📄 **CV** – Información profesional  
+- 📬 **Contacto** – Formulario y vías de contacto  
+
+---
+
+## 🎯 Objetivo del Portfolio
+
+Este proyecto no solo muestra trabajos realizados, sino también:
+
+- ✔️ Capacidad para construir interfaces limpias  
+- ✔️ Atención al detalle en diseño  
+- ✔️ Buenas prácticas en frontend  
+- ✔️ Integración frontend-backend  
+- ✔️ Estructuración escalable del código  
+
+---
