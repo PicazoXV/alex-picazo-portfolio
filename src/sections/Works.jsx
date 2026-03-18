@@ -19,12 +19,12 @@ export default function Works() {
       ratio: "16 / 9",
     },
     {
-      name: "Job Hunter",
-      url: "https://github.com/PicazoXV/Job-Hunter",
-      desc: "Aplicación web Job Hunter para gestionar postulaciones con sistema kanban, que permite manejar candidaturas en diversas fases. Desarrollo front-end con React.js, JavaScript, HTML5 y CSS3, creando interfaces modernas, responsive y centradas en UX/UI. Gestión de estado, renderizado dinámico e integración con APIs y autenticación JWT. Implementación de funcionalidades CRUD en cliente y control de versiones con Git y GitHub.", 
+      name: "MiPrimer Issue",
+      url: "https://miprimerissue.dev",
+      desc: "MiPrimerIssue.dev es una plataforma para ayudar a desarrolladores junior a empezar en open source de forma guiada, construida con Next.js, TailwindCSS y Supabase con autenticación mediante GitHub, que incluye selección de tareas, sistema de solicitudes e integración de IA, además de apartados como certificaciones, ranking tech, estadísticas y Good First Issues, y ha sido validada con feedback real de más de 30 developers junior antes de su lanzamiento.", 
       img: "/polmat.jpg",
-      tag: "WEB DESIGN, DEVELOPMENT",
-      ratio: "16 / 9",
+      tag: "WEB APP, OPEN SOURCE",
+      ratio: "16 / 10",
     },
   ];
 
