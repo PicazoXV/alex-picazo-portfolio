@@ -27,17 +27,17 @@ export default function Contact() {
 
         <div className="contactBar">
           <p className="contactBar__ask animate-in delay-2">
-            ¿Hablamos de un proyecto o una oportunidad junior?
+            ¿Hablamos de un proyecto o una oportunidad?
           </p>
 
-          <a className="contactBtn animate-in delay-3" href="mailto:TU_EMAIL@dominio.com">
+          <a className="contactBtn animate-in delay-3" href="mailto:apicazovilla@gmail.com">
             Contact me
           </a>
 
           <div className="contactLinks animate-in delay-3">
             <a href="https://github.com/PicazoXV" target="_blank" rel="noreferrer">GitHub</a>
             <a href="https://www.linkedin.com/in/alex-picazo-huerta-265723240/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="mailto:TU_EMAIL@dominio.com">Email</a>
+            <a href="mailto:apicazovilla@gmail.com">Email</a>
           </div>
         </div>
       </div>

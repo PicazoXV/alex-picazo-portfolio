@@ -15,7 +15,7 @@ export default function Navbar() {
       <div className="nav__inner">
         <div className="nav__left">
           <a className="brand" href="#top">Alex Picazo</a>
-          <div className="role">Full-Stack Web Developer</div>
+          <div className="role">Full-Stack Web Developer + IA</div>
         </div>
 
         <nav className="nav__links" aria-label="Navegación principal">

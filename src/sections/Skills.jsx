@@ -1,8 +1,9 @@
 export default function Skills() {
   const skills = [
     "HTML","CSS","JavaScript","Typescript","React","Node.js","Vite","Tailwind",
-    "Bootstrap","Figma","WordPress","Flask","PHP","APIs","Python","MySQL",
-    "Resend","Vercel","Git","GitHub",
+    "Bootstrap","Figma","WordPress","Divi","Elementor","Flask","PHP","APIs",
+    "Python","MySQL","PostgreSQL","MongoDB","Supabase","Resend","Vercel",
+    "Netlify","Cloudflare","Git","GitHub","Claude","Claude Code","Cursor","v0",
   ];
 
   return (
@@ -16,9 +17,7 @@ export default function Skills() {
           RESPONSIVE Y ESCALABLES.
         </p>
 
-        {/* animate-in aquí OK (NO en los tracks) */}
         <div className="skillsMarquee2 animate-in delay-3" aria-label="Stack carousel">
-          {/* Fila 1 */}
           <div className="marqueeRow">
             <div className="marqueeTrack">
               {skills.concat(skills).map((s, i) => (
@@ -27,11 +26,18 @@ export default function Skills() {
             </div>
           </div>
 
-          {/* Fila 2 (misma lista, dirección contraria) */}
           <div className="marqueeRow reverse">
             <div className="marqueeTrack">
               {skills.concat(skills).map((s, i) => (
                 <span key={`r2-${s}-${i}`} className="pill">{s}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="marqueeRow">
+            <div className="marqueeTrack">
+              {skills.concat(skills).map((s, i) => (
+                <span key={`r3-${s}-${i}`} className="pill">{s}</span>
               ))}
             </div>
           </div>
